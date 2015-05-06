@@ -23,24 +23,7 @@ public class Main {
 		}
 		Globals.put("dbfile", dbfile);
 
-		// FIXME: zero instead of one?
-		System.out.println("0 -> "+new Clause(new BigInteger("0")));
-		System.out.println("1 -> "+new Clause(new BigInteger("1")));
-		System.out.println("2 -> "+new Clause(new BigInteger("2")));
-		System.out.println("3 -> "+new Clause(new BigInteger("3")));
-		System.out.println("4 -> "+new Clause(new BigInteger("4")));
-		System.out.println("5 -> "+new Clause(new BigInteger("5")));
-		System.out.println("6 -> "+new Clause(new BigInteger("6")));
-		System.out.println("7 -> "+new Clause(new BigInteger("7")));
-		System.out.println("8 -> "+new Clause(new BigInteger("8")));
-		System.out.println("9 -> "+new Clause(new BigInteger("9")));
-		System.out.println("10 -> "+new Clause(new BigInteger("10")));
-		System.out.println("11 -> "+new Clause(new BigInteger("11")));
-		System.out.println("12 -> "+new Clause(new BigInteger("12")));
-		
-		System.out.println();
-		
-		System.out.println("2, -1 -> "+new Clause(2, -1).getNumber());
+		// TODO
 	}
 
 }
