@@ -4,11 +4,6 @@ import java.util.List;
 
 
 public class Clause {
-
-	final private BigInteger ZERO = new BigInteger("0");
-	final private BigInteger ONE = new BigInteger("1");
-	final private BigInteger TWO = new BigInteger("2");
-	final private BigInteger THREE = new BigInteger("3");
 	
 	final private BigInteger number;
 	
@@ -18,25 +13,17 @@ public class Clause {
 	
 	// TODO
 	public List<Integer> getVariables() {
+		String log3Repr = number.toString(3);
 		List<Integer> result = new ArrayList<Integer>();
-		BigInteger remainder = number;
-		if (remainder.equals(ZERO)) {
-			return result;
-		}
-		while (true) {
-			int var = getLog3(remainder.subtract(ONE));
-			if (var<1) {
-				break;
+		int var = 0;
+		for (int i=log3Repr.length()-1; i>=0; i--) {
+			var++;
+			char digit = log3Repr.charAt(i);
+			if (digit=='1') {
+				result.add(var);
+			} else if (digit=='2') {
+				result.add(-var);
 			}
-			BigInteger third = THREE.pow(var-1);
-			BigInteger div = third.multiply(TWO);
-			if (remainder.compareTo(div)>0) {
-				var = -var;
-				remainder = remainder.subtract(div);
-			} else {
-				remainder = remainder.subtract(third);
-			}
-			result.add(0, var);
 		}
 		return result;
 	}
@@ -48,16 +35,6 @@ public class Clause {
 			resultBuilder.append(var+" ");
 		}
 		return resultBuilder.toString();
-	}
-	
-	public int getLog3(BigInteger number) {
-		int i = 0;
-		BigInteger remainder = number;
-		while(!remainder.equals(ZERO)) {
-			remainder = remainder.divide(THREE);
-			i++;
-		}
-		return i;
 	}
 	
 }
