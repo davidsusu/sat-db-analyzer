@@ -29,4 +29,9 @@ public class Formula {
 		return null;
 	}
 	
+	public int getVariableCount() {
+		// TODO
+		return 1;
+	}
+	
 }
