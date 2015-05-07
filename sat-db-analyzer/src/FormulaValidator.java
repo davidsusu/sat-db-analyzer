@@ -29,6 +29,7 @@ public class FormulaValidator {
 			try {
 				solver.addClause(new VecInt(variablesArray));
 			} catch (ContradictionException e) {
+				return false;
 			}
 		}
 		boolean satisfiable;

@@ -5,7 +5,6 @@ import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.List;
 
-
 public class Main {
 
 	public static void main(String[] args) {
@@ -26,11 +25,24 @@ public class Main {
 		Globals.put("dbfile", dbfile);*/
 		
 		// FIXME
-		Formula formula1 = new Formula(Arrays.asList(new Clause[]{new Clause(-2, 4), new Clause(1, 2), new Clause(1, 3, -4)}));
-		System.out.println(formula1+" => "+formula1.getNumber());
-
-		Formula formula2 = new Formula(Arrays.asList(new Clause[]{new Clause(5)}));
-		System.out.println(formula2+" => "+formula2.getNumber());
+		Formula[] formulas = new Formula[]{
+			new Formula(Arrays.asList(new Clause[]{new Clause()})),
+			new Formula(Arrays.asList(new Clause[]{new Clause(-2, 4), new Clause(1, 2), new Clause(1, 3, -4)})),
+			new Formula(Arrays.asList(new Clause[]{new Clause(1), new Clause(-1)})),
+			new Formula(Arrays.asList(new Clause[]{new Clause(2)})),
+		};
+		
+		FormulaValidator validator = new FormulaValidator(100);
+		for (Formula formula : formulas) {
+			System.out.println("---------------------------------");
+			System.out.println(formula);
+			try {
+				System.out.println(validator.isSatisfiable(formula));
+			} catch (FormulaValidator.TimeoutException e) {
+				System.out.println("TIMEOUT");
+			}
+			
+		}
 		
 		// TODO
 	}
