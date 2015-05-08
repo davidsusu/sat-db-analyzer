@@ -32,7 +32,7 @@ public class Main {
 			new Formula(Arrays.asList(new Clause[]{new Clause(2)})),
 		};
 		
-		FormulaValidator validator = new FormulaValidator(100);
+		FormulaValidator validator = new SolverFormulaValidator(100);
 		for (Formula formula : formulas) {
 			System.out.println("---------------------------------");
 			System.out.println(formula);
