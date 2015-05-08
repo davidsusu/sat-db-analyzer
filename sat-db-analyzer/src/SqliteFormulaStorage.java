@@ -1,21 +1,34 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.Iterator;
 
 
 public class SqliteFormulaStorage implements FormulaStorage {
-
-	static private Connection connection = null;
 	
-	static public Connection getConnection() throws ClassNotFoundException, SQLException {
-		if (connection==null) {
-			Class.forName("org.sqlite.JDBC");
-			connection = DriverManager.getConnection("jdbc:sqlite:"+Globals.get("dbfile"));
+	final private Connection sqliteConnection;
+	
+	static private SqliteFormulaStorage _instance = null;
+	
+	static public SqliteFormulaStorage instance() {
+		Connection connection = null;
+		if (_instance==null) {
+			try {
+				Class.forName("org.sqlite.JDBC");
+				connection = DriverManager.getConnection("jdbc:sqlite:"+Globals.get("dbfile"));
+			} catch (Exception e) {
+				// FIXME
+				throw new RuntimeException("Can not open database file");
+			}
+			_instance = new SqliteFormulaStorage(connection);
 		}
-		return connection;
+		return _instance;
 	}
-
+	
+	public SqliteFormulaStorage(Connection sqliteConnection) {
+		this.sqliteConnection = sqliteConnection;
+		// TODO: init database
+	}
+	
 	@Override
 	public void save(Row row) {
 		// TODO
